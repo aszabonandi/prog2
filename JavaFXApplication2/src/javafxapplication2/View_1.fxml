@@ -1,0 +1,19 @@
+            <Pane fx:id="gamePane" prefHeight="679.0" prefWidth="913.0" visible="false">
+               <children>
+                  <SplitPane dividerPositions="0.29797979797979796" prefHeight="679.0" prefWidth="913.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Button layoutX="15.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="Műhely" />
+                  <Button layoutX="15.0" layoutY="85.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="HaHu" />
+                  <Button layoutX="15.0" layoutY="150.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="Groove Street" />
+                  <Button layoutX="15.0" layoutY="214.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="Garázs" />
+                        <Button fx:id="closeGameButton" layoutX="15.0" layoutY="596.0" mnemonicParsing="false" onAction="" prefHeight="39.0" prefWidth="124.0" text="Visszalépés" />
+                  <Button layoutX="15.0" layoutY="540.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="Mentés" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="652.0" />
+        </items>
+                  </SplitPane>
+               </children>
+            </Pane>

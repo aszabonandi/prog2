@@ -16,7 +16,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 /**
  * @author aszab
  */
@@ -25,7 +28,14 @@ public class ViewController implements Initializable {
         //Panes 
             @FXML
             private AnchorPane rootPane;
+            @FXML
+            private Pane settingsPane;
+            @FXML
+            private SplitPane gamePane;
+            @FXML
+            private Pane charterCreater;
         //Buttons
+            //Main Menu Buttons
             @FXML
             private Button continueGameButton;
             @FXML
@@ -37,35 +47,48 @@ public class ViewController implements Initializable {
             //Elemek A Beállítások Menüpontból
             @FXML
             private Button backButton;
+            //Charter Creater Buttons
+            @FXML
+            private Button STARTbutton;
         //Labels
             @FXML
             private Label label;
+        //TextFields
+            @FXML
+            private TextField charterName;
+            @FXML
+            private TextField charterAge;
     
     
+            //Főmenü Menüpontjainak Kezelése
     //Új Játék Kezdete
     @FXML
     private void newGame(ActionEvent event) {
-        try {
+            charterCreater.setVisible(true);
             System.out.println("Az Új Játék Sikeresen Elkezdődött");
-        } catch (Exception e) {
-            System.out.println(" "+ System.err);
-        }
     }
+    @FXML
+    private void realStart(ActionEvent event){
+        charterCreater.setVisible(false);
+        gamePane.setVisible(true);
+    }
+    
     //Meglévő Játék Folytatása
     @FXML
     private void continueGame(ActionEvent event) {
-        try {
-            System.out.println("Játék Folytatása ...");
-        } catch (Exception e) {
-            System.out.println(" "+ System.err);
-        }
+            gamePane.setVisible(true);
     }
+    
     //Beállítások Menüpont Megnyitása
     @FXML
     public void openSettings(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
-        Scene scene = new Scene(root);
-
+        settingsPane.setVisible(true);
+    }
+    
+    //Beállítások Menüpont Bezárása
+    @FXML
+    public void closeSettings(ActionEvent event) throws IOException {
+        settingsPane.setVisible(false);
     }
     
     //KILÉPÉS A Programból
@@ -74,6 +97,15 @@ public class ViewController implements Initializable {
         System.exit(0);
     }
     
+    //Karakter Készítő Függvényei és Metódusai
+
+    
+    //Fő Játék Menüpontjai
+        //VisszaLépés A Főmenübe
+    @FXML
+    private void backToHome(ActionEvent event){
+        gamePane.setVisible(false);
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
