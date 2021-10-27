@@ -8,6 +8,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -17,22 +19,22 @@
     <children>
       <Pane id="mainPane" layoutX="-5.0" prefHeight="679.0" prefWidth="913.0">
          <children>
-            <Label layoutX="181.0" layoutY="30.0" text="Játék címe" textFill="#940ccf">
+            <Label layoutX="272.0" layoutY="56.0" text="Cím játéka" textFill="#940ccf">
                <font>
-                  <Font size="120.0" />
+                  <Font size="80.0" />
                </font>
             </Label>
-            <Button id="continueGameButton" layoutX="325.0" layoutY="240.0" mnemonicParsing="false" onAction="#continueGame" prefHeight="71.0" prefWidth="263.0" text="Játék Folytatása" textFill="#910ccfdf">
+            <Button id="continueGameButton" layoutX="326.0" layoutY="294.0" mnemonicParsing="false" onAction="#continueGame" prefHeight="71.0" prefWidth="263.0" text="Játék Folytatása" textFill="#910ccfdf">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Button>
-            <Button id="newGameButton" layoutX="337.0" layoutY="340.0" mnemonicParsing="false" onAction="#newGame" prefHeight="63.0" prefWidth="239.0" text="Új Játék Kezdése!" textFill="#940ccfc2">
+            <Button id="newGameButton" layoutX="338.0" layoutY="394.0" mnemonicParsing="false" onAction="#newGame" prefHeight="63.0" prefWidth="239.0" text="Új Játék Kezdése!" textFill="#940ccfc2">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
-            <Button id="settingsButton" fx:id="settingsButton" layoutX="360.0" layoutY="432.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="48.0" prefWidth="193.0" text="Beállítások" textFill="#940ccf">
+            <Button id="settingsButton" fx:id="settingsButton" layoutX="360.0" layoutY="481.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="48.0" prefWidth="193.0" text="Beállítások" textFill="#940ccf">
                <font>
                   <Font name="System Bold Italic" size="29.0" />
                </font>
@@ -87,7 +89,7 @@
             <Pane fx:id="charterCreater" layoutX="181.0" layoutY="106.0" prefHeight="375.0" prefWidth="578.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#940ccf" height="375.0" stroke="BLACK" strokeType="INSIDE" width="578.0" />
-                  <Label layoutX="193.0" layoutY="41.0" prefHeight="56.0" prefWidth="193.0" text="Karakter Neve">
+                  <Label fx:id="chartacterNameLabel" layoutX="193.0" layoutY="41.0" prefHeight="56.0" prefWidth="193.0" text="Karakter Neve">
                      <font>
                         <Font size="29.0" />
                      </font>
@@ -112,6 +114,11 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
+                  <Label fx:id="noNameLabel" layoutX="234.0" layoutY="14.0" prefHeight="40.0" prefWidth="223.0" text="Adj meg nevet!" visible="false" wrapText="true">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <SplitPane fx:id="gamePane" dividerPositions="0.29797979797979796" layoutX="1.0" prefHeight="679.0" prefWidth="913.0" visible="false">
@@ -119,15 +126,87 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                 <children>
                   <Button layoutX="15.0" layoutY="14.0" prefHeight="39.0" prefWidth="124.0" text="Műhely" />
-                  <Button layoutX="15.0" layoutY="85.0" prefHeight="39.0" prefWidth="124.0" text="HaHu" />
+                  <Button fx:id="hahuButton" layoutX="15.0" layoutY="85.0" onAction="#openHahu" prefHeight="39.0" prefWidth="124.0" text="HaHu" />
                   <Button layoutX="15.0" layoutY="150.0" prefHeight="39.0" prefWidth="124.0" text="Groove Street" />
                   <Button layoutX="15.0" layoutY="214.0" prefHeight="39.0" prefWidth="124.0" text="Garázs" />
                         <Button fx:id="closeGameButton" layoutX="15.0" layoutY="596.0" onAction="#backToHome" prefHeight="39.0" prefWidth="124.0" text="Visszalépés" />
-                  <Button layoutX="15.0" layoutY="540.0" prefHeight="39.0" prefWidth="124.0" text="Mentés" />
+                  <Button layoutX="15.0" layoutY="540.0" onAction="#saveGame" prefHeight="39.0" prefWidth="124.0" text="Mentés" />
+                        <Label fx:id="showName" layoutX="14.0" layoutY="276.0" prefHeight="31.0" prefWidth="193.0" text="Lafaszbel" />
+                        <Label fx:id="showMoney" layoutX="14.0" layoutY="307.0" prefHeight="31.0" prefWidth="248.0" text="Label" />
+                        <Label fx:id="showHappiness" layoutX="14.0" layoutY="339.0" prefHeight="31.0" prefWidth="126.0" text="Label" />
+                        <Label fx:id="showRespect" layoutX="14.0" layoutY="370.0" prefHeight="31.0" prefWidth="239.0" text="Label" />
                
                 </children>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <Pane fx:id="hahuPane" prefHeight="677.0" prefWidth="637.0" visible="false">
+                           <children>
+                              <Pane fx:id="hahuCarPane11" layoutX="21.0" layoutY="14.0" prefHeight="165.0" prefWidth="570.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" stroke="BLACK" strokeType="INSIDE" width="570.0" />
+                                    <Label fx:id="hahuCarName11" layoutX="237.0" prefHeight="40.0" prefWidth="202.0" text="Kocsi Neve" />
+                                    <Label fx:id="hahuCarPaintJob11" layoutX="237.0" layoutY="40.0" prefHeight="40.0" prefWidth="132.0" text="Fényezés" />
+                                    <Label fx:id="hahuCarRust11" layoutX="237.0" layoutY="80.0" prefHeight="40.0" prefWidth="149.0" text="Rozsdásodás" />
+                                    <Label fx:id="hahuCarCondition11" layoutX="237.0" layoutY="120.0" prefHeight="40.0" prefWidth="175.0" text="Összállapot" />
+                                    <Button fx:id="hahuCarBuy11" layoutX="488.0" layoutY="128.0" mnemonicParsing="false" text="Megveszem" />
+                                    <Label fx:id="hahuCarPrice11" layoutX="460.0" layoutY="12.0" prefHeight="40.0" prefWidth="101.0" text="Kocsi Ára" />
+                                    <Label layoutX="445.0" layoutY="60.0" text="Angel Eyes : NINCS" />
+                                    <ImageView fx:id="hahuCarImage11" fitHeight="150.0" fitWidth="200.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../e21.jpg" />
+                                       </image></ImageView>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="hahuCarPane111" layoutX="21.0" layoutY="195.0" prefHeight="165.0" prefWidth="570.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" stroke="BLACK" strokeType="INSIDE" width="570.0" />
+                                    <Label fx:id="hahuCarName111" layoutX="237.0" prefHeight="40.0" prefWidth="202.0" text="Kocsi Neve" />
+                                    <Label fx:id="hahuCarPaintJob111" layoutX="237.0" layoutY="40.0" prefHeight="40.0" prefWidth="132.0" text="Fényezés" />
+                                    <Label fx:id="hahuCarRust111" layoutX="237.0" layoutY="80.0" prefHeight="40.0" prefWidth="149.0" text="Rozsdásodás" />
+                                    <Label fx:id="hahuCarCondition111" layoutX="237.0" layoutY="120.0" prefHeight="40.0" prefWidth="175.0" text="Összálapot" />
+                                    <Button fx:id="hahuCarBuy111" layoutX="488.0" layoutY="128.0" mnemonicParsing="false" text="Megveszem" />
+                                    <Label fx:id="hahuCarPrice111" layoutX="460.0" layoutY="12.0" prefHeight="40.0" prefWidth="101.0" text="Kocsi Ára" />
+                                    <Label layoutX="445.0" layoutY="60.0" text="Angel Eyes : NINCS" />
+                                    <ImageView fx:id="hahuCarImage111" fitHeight="150.0" fitWidth="200.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="hahuCarPane1111" layoutX="21.0" layoutY="375.0" prefHeight="165.0" prefWidth="570.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" stroke="BLACK" strokeType="INSIDE" width="570.0" />
+                                    <Label fx:id="hahuCarName1111" layoutX="237.0" prefHeight="40.0" prefWidth="202.0" text="Kocsi Neve" />
+                                    <Label fx:id="hahuCarPaintJob1111" layoutX="237.0" layoutY="40.0" prefHeight="40.0" prefWidth="132.0" text="Fényezés" />
+                                    <Label fx:id="hahuCarRust1111" layoutX="237.0" layoutY="80.0" prefHeight="40.0" prefWidth="149.0" text="Rozsdásodás" />
+                                    <Label fx:id="hahuCarCondition1111" layoutX="237.0" layoutY="120.0" prefHeight="40.0" prefWidth="175.0" text="Összálapot" />
+                                    <Button fx:id="hahuCarBuy1111" layoutX="488.0" layoutY="128.0" mnemonicParsing="false" text="Megveszem" />
+                                    <Label fx:id="hahuCarPrice1111" layoutX="460.0" layoutY="12.0" prefHeight="40.0" prefWidth="101.0" text="Kocsi Ára" />
+                                    <Label layoutX="445.0" layoutY="60.0" text="Angel Eyes : NINCS" />
+                                    <ImageView fx:id="hahuCarImage1111" fitHeight="150.0" fitWidth="200.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Button fx:id="hahuRefreshButton" layoutX="118.0" layoutY="583.0" mnemonicParsing="false" onAction="#generateOffer" prefHeight="69.0" prefWidth="376.0" text="Ajánlat Frissítése (50.000Ft)" textFill="#85188d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="poorPopUp" layoutX="248.0" layoutY="83.0" prefHeight="489.0" prefWidth="474.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#871fff" height="198.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="474.0" />
+                              <Label layoutY="14.0" prefHeight="80.0" prefWidth="483.0" text="CSÓRÓ VAGY NEMKAPSZ AJÁNLATOT!!" textFill="#511414">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="poorButton" layoutX="163.0" layoutY="130.0" mnemonicParsing="false" onAction="#closePopUp" prefHeight="39.0" prefWidth="132.0" text="FELFOGTAM!!" textFill="#d31414">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
               </items>
             </SplitPane>
          </children>

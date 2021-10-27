@@ -11,7 +11,7 @@ public class Car {
     boolean angelEyes = false;
     
     
-private  int getCondition(int paintjob, int rust, boolean angelEyes){
+private  int getCondition(int paintjob, int rust){
     condition = (paintjob + rust)/2;
     return condition;
 }
