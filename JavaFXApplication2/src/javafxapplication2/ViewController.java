@@ -32,6 +32,7 @@ import javafx.scene.layout.Pane;
 public class ViewController implements Initializable {
 
     //OsztályVáltozók
+    Car autok = new Car();
     Character maincharter = new Character();
     Hahu hahu = new Hahu();
     boolean hahuOpened = false;
@@ -211,7 +212,7 @@ public class ViewController implements Initializable {
             seged = (int) (Math.random() * 8);
             int r = hahu.getRust()[seged];
             int cond = (pj + r) / 2;
-            int price = 0;
+            double price = 0;
             if (cond == 10) {
                 price = (int) (Math.random() * 100000) + 50000;
             }
@@ -227,6 +228,8 @@ public class ViewController implements Initializable {
             if (cond > 90) {
                 price = (int) (Math.random() * 3000000) + 3000000;
             }
+            if (maincharter.getFriends()>=1)
+                price = price * 0.7;
             hahuCarPrice11.setText("Ár: " + price + "Ft");
             hahuCarName11.setText(carName);
             hahuCarPaintJob11.setText("Fényezés: " + pj + "%");
@@ -260,6 +263,9 @@ public class ViewController implements Initializable {
             if (cond > 90) {
                 price = (int) (Math.random() * 3000000) + 3000000;
             }
+            if (maincharter.getFriends()>=1)
+                price = price * 0.7;
+            
             hahuCarPrice111.setText("Ár: " + price + "Ft");
             hahuCarName111.setText(carName);
             hahuCarPaintJob111.setText("Fényezés: " + pj + "%");
@@ -289,6 +295,9 @@ public class ViewController implements Initializable {
             if (cond > 90) {
                 price = (int) (Math.random() * 3000000) + 3000000;
             }
+            if (maincharter.getFriends()>=1)
+                price = price * 0.7;
+            
             hahuCarPrice1111.setText("Ár: " + price + "Ft");
             hahuCarName1111.setText(carName);
             hahuCarPaintJob1111.setText("Fényezés: " + pj + "%");
@@ -313,7 +322,7 @@ public class ViewController implements Initializable {
             seged = (int) (Math.random() * 8);
             int r = hahu.getRust()[seged];
             int cond = (pj + r) / 2;
-            int price = 0;
+            double price = 0;
             if (cond == 10) {
                 price = (int) (Math.random() * 100000) + 50000;
             }
@@ -329,6 +338,9 @@ public class ViewController implements Initializable {
             if (cond > 90) {
                 price = (int) (Math.random() * 3000000) + 3000000;
             }
+            if (maincharter.getFriends()>=1)
+                price = price * 0.7;
+            
             hahuCarPrice11.setText("Ár: " + price + "Ft");
             hahuCarName11.setText(carName);
             hahuCarPaintJob11.setText("Fényezés: " + pj + "%");
@@ -358,6 +370,8 @@ public class ViewController implements Initializable {
             if (cond > 90) {
                 price = (int) (Math.random() * 3000000) + 3000000;
             }
+            if (maincharter.getFriends()>=1)
+                price = price * 0.7;
             hahuCarPrice111.setText("Ár: " + price + "Ft");
             hahuCarName111.setText(carName);
             hahuCarPaintJob111.setText("Fényezés: " + pj + "%");
@@ -387,6 +401,8 @@ public class ViewController implements Initializable {
             if (cond > 90) {
                 price = (int) (Math.random() * 3000000) + 3000000;
             }
+            if (maincharter.getFriends()>=1)
+                price = price * 0.7;
             hahuCarPrice1111.setText("Ár: " + price + "Ft");
             hahuCarName1111.setText(carName);
             hahuCarPaintJob1111.setText("Fényezés: " + pj + "%");
@@ -424,8 +440,9 @@ public class ViewController implements Initializable {
         fw.write(maincharter.getName() + "," + maincharter.getMoney() + "," + maincharter.getHappiness() + "," + maincharter.getCars() + "," + maincharter.getRespect() + "," + maincharter.getFriends());
         fw.close();
         System.out.print("Sikeres Mentés: ");
-        System.out.println (maincharter.getName() + "," + maincharter.getMoney() + "," + maincharter.getHappiness() + "," + maincharter.getCars() + "," + maincharter.getRespect() + "," + maincharter.getFriends());
+        System.out.println(maincharter.getName() + "," + maincharter.getMoney() + "," + maincharter.getHappiness() + "," + maincharter.getCars() + "," + maincharter.getRespect() + "," + maincharter.getFriends());
     }
+
     private void saveGame() throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter("mentes.txt");
         fw.write(maincharter.getName() + "," + maincharter.getMoney() + "," + maincharter.getHappiness() + "," + maincharter.getCars() + "," + maincharter.getRespect() + "," + maincharter.getFriends());
@@ -448,4 +465,33 @@ public class ViewController implements Initializable {
 
     }
 
+    private void buyCar() throws IOException {
+        FileWriter fw = new FileWriter("autok.txt");
+        int ar = 0;
+        String tipus = "";
+        int fenyezes = 0, rozsda = 0;
+        int allapot = (fenyezes + rozsda) / 2;
+        fw.write(ar+","+tipus+","+fenyezes+","+rozsda+","+allapot);
+        maincharter.setRespect(maincharter.getRespect()+10);
+        showRespect.setText("Tiszteletreméltóságosság: " + maincharter.getRespect() + " 8)");
+    }
+
+    private void showCars() throws FileNotFoundException {
+        File f = new File("autok.txt");
+        Scanner s = new Scanner(f);
+        int hanyAuto = maincharter.getCars();
+        for (int i = 0; i < hanyAuto; i++) {
+            String nn = s.nextLine();
+            String nnParts[] = nn.split(",");
+            //i-edik elembe tolteni fel az adatokat
+        }
+    }
 }
+
+// barátok: 
+// 1 - Peti: HaHu árak -30%
+// 2 - Marci: Kasztnizás -30%
+// 3 - Laci: Fényezés -30%
+// 4 - Boost: Boldogság 100%
+//
+// a magasabb szint az előzőeket is magában foglalja

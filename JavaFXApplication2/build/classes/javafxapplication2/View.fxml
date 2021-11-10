@@ -130,7 +130,7 @@
                   <Button layoutX="15.0" layoutY="150.0" prefHeight="39.0" prefWidth="124.0" text="Groove Street" />
                   <Button layoutX="15.0" layoutY="214.0" prefHeight="39.0" prefWidth="124.0" text="Garázs" />
                         <Button fx:id="closeGameButton" layoutX="15.0" layoutY="596.0" onAction="#backToHome" prefHeight="39.0" prefWidth="124.0" text="Visszalépés" />
-                  <Button layoutX="15.0" onAction="#saveGame"  layoutY="540.0" prefHeight="39.0" prefWidth="124.0" text="Mentés" />
+                  <Button layoutX="15.0" layoutY="540.0" onAction="#saveGame" prefHeight="39.0" prefWidth="124.0" text="Mentés" />
                         <Label fx:id="showName" layoutX="14.0" layoutY="276.0" prefHeight="31.0" prefWidth="193.0" text="Lafaszbel" />
                         <Label fx:id="showMoney" layoutX="14.0" layoutY="307.0" prefHeight="31.0" prefWidth="248.0" text="Label" />
                         <Label fx:id="showHappiness" layoutX="14.0" layoutY="339.0" prefHeight="31.0" prefWidth="126.0" text="Label" />
